@@ -1,0 +1,27 @@
+body {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            height: 50vh;
+            margin: 0;
+        }
+        .content-box {
+            border: 5px solid #ff0000; /* Border style */
+            padding: 20px; /* Padding around the content */
+            border-radius: 10px; /* Optional: Rounded corners */
+        }
+
+        #drag {
+            position: absolute;
+            z-index: 9;
+            background-color: #f1f1f1;
+            border: 1px solid #d3d3d3;
+            text-align: center;
+        }   
+        #dragheader {
+            padding: 10px;
+            cursor: move;
+            z-index: 10;
+            background-color: #2196F3;
+            color: #fff;
+        }

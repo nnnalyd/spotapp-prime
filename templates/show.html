@@ -1,0 +1,72 @@
+<head> 
+    <title>Spot App</title>
+    <style src='show-style.css'></style>
+</head>
+<body>
+    <div class="content-box">
+        <h1>{{ data }}</h1>
+        <img src = "{{ image }}" alt= "image" >
+    </div>
+    <div id="drag" style = "display: none;">
+        <div id="dragheader">Move Me</div>
+    </div>
+
+    <input type="button" name="answer" value="Show Div" onclick="showDiv()" />
+
+    <script>
+
+        function showDiv(){
+            document.getElementById('drag').style.display = "block";
+        }
+        dragElement(document.getElementById("drag"));
+
+        function dragElement(elmnt) {
+            var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+            if (document.getElementById(elmnt.id + "header")) {
+                // if present, the header is where you move the DIV from:
+                document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+            } else {
+                // otherwise, move the DIV from anywhere inside the DIV:
+                elmnt.onmousedown = dragMouseDown;
+            }
+
+        function dragMouseDown(e) {
+            e = e || window.event;
+            e.preventDefault();
+            // get the mouse cursor position at startup:
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            document.onmouseup = closeDragElement;
+            // call a function whenever the cursor moves:
+            document.onmousemove = elementDrag;
+        }
+
+        function elementDrag(e) {
+            e = e || window.event;
+            e.preventDefault();
+            // calculate the new cursor position:
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            // set the element's new position:
+            elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+            elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+        }
+
+        function closeDragElement() {
+            // stop moving when mouse button is released:
+            document.onmouseup = null;
+            document.onmousemove = null;
+        }
+        }
+    </script>
+
+    <div class="newReleases">
+        <h1> New Releases </h1>
+        <h2>{{ newReleaseArtist }}</h2>
+        <h2> {{ newReleaseAlbum }}</h2>
+        <img src = "{{ newReleaseURL }}" alt = "album image">
+    </div>
+
+</body>
